@@ -2,11 +2,12 @@
     display: flex;
     flex-direction: column;    
     justify-content: center;
+    width: 90%;
 }
 .shopcategory-banner{
     display: block;
-    margin: 30px auto;
-    width: 82%;
+    margin: 80px auto;
+    height: 300px;
 }
 .shopcategory-indexSort{
     display:  flex;
