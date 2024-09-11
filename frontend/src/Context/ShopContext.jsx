@@ -52,7 +52,9 @@ const ShopContextProvider = (props) => {
         .then((data) => console.log(data));
     }
   };
-
+  const clearCart = () => {
+    setCartItems({});
+  };
   const removeFromCart = (itemId) => {
     setCartItems((prev) => ({
       ...prev,
@@ -100,7 +102,7 @@ const ShopContextProvider = (props) => {
     all_product,
     cartItems,
     addToCart,
-    removeFromCart,
+    removeFromCart,clearCart
   };
 
   return (

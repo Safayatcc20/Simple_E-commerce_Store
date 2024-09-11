@@ -209,7 +209,7 @@ app.get('/newcollections', async (req, res) => {
 
 //creating endpoint for popular in women sectiong
 app.get('/popularinwomen',async(req,res)=>{
-    let products = await Product.find({ category: "women" })
+    let products = await Product.find({ category: "men" })
             .sort({ _id: -1 }) 
             .limit(4);
 
@@ -245,14 +245,40 @@ app.post('/addtocart',fetchUser,async(req,res)=>{
 })
 
 //creating endpoint to removing from cartdata
-app.post('/removefromcart',async(req,res)=>{
-    console.log("removed",req.body.itemId);
-    let userData = await Users.findOne({_id:req.user.id});
-    if(userData.cartData[req.body.itemId]>0)
-    userData.cartData[req.body.itemId] -=1;
-    await Users.findOneAndUpdate({_id:req.user.id},{cartData:userData.cartData});
-    res.send("Removed")
-})
+// app.post('/removefromcart',async(req,res)=>{
+//     console.log("removed",req.body.itemId);
+//     let userData = await Users.findOne({_id:req.user.id});
+//     if(userData.cartData[req.body.itemId]>0)
+//     userData.cartData[req.body.itemId] -=1;
+//     await Users.findOneAndUpdate({_id:req.user.id},{cartData:userData.cartData});
+//     res.send("Removed")
+// })
+// Creating endpoint to remove from cart data
+app.post('/removefromcart', fetchUser, async (req, res) => {
+    try {
+        console.log("Removing", req.body.itemId);
+        
+        // Find the user by ID from the token
+        let userData = await Users.findOne({ _id: req.user.id });
+        
+        if (!userData) {
+            return res.status(404).json({ success: false, errors: "User not found" });
+        }
+
+        // Check if the item exists in the cart and decrement quantity
+        if (userData.cartData[req.body.itemId] > 0) {
+            userData.cartData[req.body.itemId] -= 1;
+            await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData.cartData });
+            return res.json({ success: true, message: "Removed from cart" });
+        } else {
+            return res.status(400).json({ success: false, errors: "Item not in cart or already at minimum quantity" });
+        }
+    } catch (error) {
+        console.error("Error removing from cart:", error);
+        res.status(500).json({ success: false, errors: "Internal server error" });
+    }
+});
+
 
 // creating endpoint to get cartdasta
 app.post('/getcart',fetchUser,async(req,res)=>{
@@ -261,6 +287,8 @@ app.post('/getcart',fetchUser,async(req,res)=>{
     res.json(userData.cartData);
 
 })
+
+
 
 app.listen(port,(error)=>{
     if(!error){

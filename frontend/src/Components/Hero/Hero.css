@@ -1,5 +1,5 @@
 .hero{
-    margin-top: 20px;
+    margin-top: 70px;
     background: linear-gradient(180deg , #fde1ff , #e1ffea22 60%);
     display: flex;
 }
@@ -20,13 +20,13 @@
 .hero-left p{
     
     color: #171717;
-    font-size: 80px;
-    font-weight: 700;
+    font-size: 60px;
+    font-weight: 500;
 }
 .hero-collection-text {
   color: #171717;
-  font-size: 72px;
-  font-weight: 700;
+  font-size: 60px;
+  font-weight: 500;
   margin: 0;
 }
 .hero-hand-icon{
