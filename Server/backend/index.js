@@ -8,7 +8,15 @@ const path = require("path");
 const cors = require("cors");
 // const { error } = require("console");
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: [
+    "https://698ba054f9b890c674a5e114--elaborate-frangollo-9053ff.netlify.app/",
+    "https://698ba4fa472abbbfe7ad2cf7--elaborate-frangollo-9053ff.netlify.app/"
+  ],
+  allowedHeaders: ["Content-Type", "auth-token"],
+  credentials: true
+}));
+
 
 //Database connection with MongoDb
 mongoose.connect("mongodb+srv://safayat:1514908666@cluster0.fqeu7.mongodb.net/Simple_E-commerce_Store");
