@@ -7,6 +7,14 @@ const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
 // const { error } = require("console");
+require("dotenv").config();
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 app.use(express.json());
 app.use(cors({
   origin: [
@@ -19,7 +27,12 @@ app.use(cors({
 
 
 //Database connection with MongoDb
-mongoose.connect("mongodb+srv://safayat:1514908666@cluster0.fqeu7.mongodb.net/Simple_E-commerce_Store");
+mongoose.connect(
+  "mongodb+srv://safayat:1514908666@cluster0.fqeu7.mongodb.net/Simple_E-commerce_Store?retryWrites=true&w=majority",
+  { serverSelectionTimeoutMS: 10000 }
+)
+.then(() => console.log("✅ MongoDB Connected"))
+.catch((err) => console.log("❌ MongoDB Error:", err));
 
 //Api creation
 
@@ -36,17 +49,45 @@ const storage = multer.diskStorage({
     }
 })
 
-const upload = multer({storage:storage})
+const upload = multer({ storage: multer.memoryStorage() });
+
 
 //creating upload endpoint for images
-app.use('/images',express.static('upload/images'))
+// app.use('/images',express.static('upload/images'))
 
-app.post("/upload",upload.single('product'),(req,res)=>{
-    res.json({
-        success:1,
-        image_url:`http://localhost:${port}/images/${req.file.filename}`
-    })
-})
+// app.post("/upload",upload.single('product'),(req,res)=>{
+//     res.json({
+//         success:1,
+//         image_url:`http://localhost:${port}/images/${req.file.filename}`
+//     })
+// })
+app.post("/upload", upload.single("product"), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ success: 0, message: "No file uploaded" });
+    }
+
+    const result = await new Promise((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        { folder: "simple-ecommerce/products", resource_type: "image" },
+        (error, uploadResult) => {
+          if (error) return reject(error);
+          resolve(uploadResult);
+        }
+      );
+      stream.end(req.file.buffer);
+    });
+
+    return res.json({
+      success: 1,
+      image_url: result.secure_url,
+      public_id: result.public_id,
+    });
+  } catch (err) {
+    console.error("Cloudinary upload error:", err);
+    return res.status(500).json({ success: 0, message: "Upload failed" });
+  }
+});
 
 //Schema for Creating Products
 
