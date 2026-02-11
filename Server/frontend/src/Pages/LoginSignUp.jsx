@@ -17,7 +17,7 @@ const LoginSignUp = () => {
   const login = async()=>{
     console.log("Login Function Executed",formData);
     let responseData;
-    await fetch('https://simple-e-commerce-store-1.onrender.com/login',{
+    await fetch('https://simple-e-commerce-store-3.onrender.com/login',{
       method:'POST',
       headers:{
         Accept:'application/json',
@@ -38,7 +38,7 @@ const LoginSignUp = () => {
   const signup = async()=>{
     console.log("Sign Up Function Executed",formData);
     let responseData;
-    await fetch('https://simple-e-commerce-store-1.onrender.com/signup',{
+    await fetch('https://simple-e-commerce-store-3.onrender.com/signup',{
       method:'POST',
       headers:{
         Accept:'application/json',

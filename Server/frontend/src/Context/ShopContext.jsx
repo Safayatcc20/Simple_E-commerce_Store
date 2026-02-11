@@ -15,12 +15,12 @@ const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState(getdefaultCart());
 
   useEffect(() => {
-    fetch("https://simple-e-commerce-store-1.onrender.com/allproducts")
+    fetch("https://simple-e-commerce-store-3.onrender.com/allproducts")
       .then((response) => response.json())
       .then((data) => setAll_product(data));
 
       if(localStorage.getItem('auth-token')){
-        fetch('https://simple-e-commerce-store-1.onrender.com/getcart',{
+        fetch('https://simple-e-commerce-store-3.onrender.com/getcart',{
             method:'POST',
             headers:{
                 Accept:'application/form-data',
@@ -39,7 +39,7 @@ const ShopContextProvider = (props) => {
     }));
 
     if (localStorage.getItem("auth-token")) {
-      fetch("https://simple-e-commerce-store-1.onrender.com/addtocart", {
+      fetch("https://simple-e-commerce-store-3.onrender.com/addtocart", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -61,7 +61,7 @@ const ShopContextProvider = (props) => {
       [itemId]: (prev[itemId] || 0) - 1,
     }));
     if (localStorage.getItem("auth-token")) {
-      fetch("https://simple-e-commerce-store-1.onrender.com/removefromcart", {
+      fetch("https://simple-e-commerce-store-3.onrender.com/removefromcart", {
         method: "POST",
         headers: {
           Accept: "application/json",

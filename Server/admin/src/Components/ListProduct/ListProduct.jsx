@@ -7,7 +7,7 @@ const ListProduct = () => {
 
   const fetchInfo = async () => {
     try {
-      const response = await fetch("https://simple-e-commerce-store-1.onrender.com/allproducts");
+      const response = await fetch("https://simple-e-commerce-store-3.onrender.com/allproducts");
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -23,7 +23,7 @@ const ListProduct = () => {
   }, [])
 
   const remove_product = async(id)=>{
-    await fetch('https://simple-e-commerce-store-1.onrender.com/removeproduct',{
+    await fetch('https://simple-e-commerce-store-3.onrender.com/removeproduct',{
       method:'POST',
       headers:{
         Accept:'application/json',
