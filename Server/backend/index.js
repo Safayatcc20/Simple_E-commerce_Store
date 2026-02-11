@@ -18,8 +18,8 @@ cloudinary.config({
 app.use(express.json());
 app.use(cors({
   origin: [
-    "https://698ba054f9b890c674a5e114--elaborate-frangollo-9053ff.netlify.app/",
-    "https://698ba4fa472abbbfe7ad2cf7--elaborate-frangollo-9053ff.netlify.app/"
+    "https://simple-e-commerce-store-bzi6.vercel.app/",
+    "https://simple-e-commerce-store-49x1.vercel.app/"
   ],
   allowedHeaders: ["Content-Type", "auth-token"],
   credentials: true
