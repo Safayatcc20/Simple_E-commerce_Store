@@ -18,8 +18,8 @@ cloudinary.config({
 app.use(express.json());
 app.use(cors({
   origin: [
-    "https://simple-e-commerce-store-bzi6.vercel.app/",
-    "https://simple-e-commerce-store-49x1.vercel.app/"
+    "https://simple-e-commerce-store-bzi6.vercel.app",
+    "https://simple-e-commerce-store-49x1.vercel.app"
   ],
   allowedHeaders: ["Content-Type", "auth-token"],
   credentials: true
