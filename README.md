@@ -17,7 +17,7 @@ A full-stack e-commerce web application built with the MERN stack (MongoDB, Expr
 * **Admin Dashboard:** Add, update, and delete products through CRUD operations.
 * **Image Uploads:** Handle product image uploads using Multer.
 * **Checkout:** Support the order and checkout workflow.
-## Screenshots
+## Interface Preview
 
 | Home Page                     | Men's Collection            |
 | ----------------------------- | --------------------------- |
