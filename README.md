@@ -25,7 +25,7 @@ A full-stack e-commerce web application built with the MERN stack (MongoDB, Expr
 
 | Women's Collection              | Kids' Collection              |
 | ------------------------------- | ----------------------------- |
-| ![Women](screenshots/women.png) | ![Kids](<img width="1223" height="583" alt="Screenshot 2026-10-10 012318" src="https://github.com/user-attachments/assets/1b2c359e-2ccb-45b7-adb7-322b39bf9c62" />) |
+| ![Women](screenshots/women.png) | ![Kids](https://github.com/user-attachments/assets/1b2c359e-2ccb-45b7-adb7-322b39bf9c62) |
 
 ### Admin Panel
 
